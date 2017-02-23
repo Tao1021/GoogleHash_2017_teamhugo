@@ -28,7 +28,10 @@ numCaches = int(generalSpecLineParts[3])
 
 # parse video sizes
 videoSizesLine = infile.readline()
-videosSizes = map(int, videoSizesLine.split())
+videoSizesLineParts = videoSizesLine.split(); 
+videosSizes = []
+for vs in videoSizesLineParts:
+    videosSizes.append(int(vs))
 
 # Read end point data
 
