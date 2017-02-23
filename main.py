@@ -5,16 +5,28 @@ class EndPoint:
         self._endPointDataCenterLink = endPointDataCenterLink
         self._numCaches = numCaches
         self._cacheLinks = {}
+        self._requests = {}
         
     def __str__(self):
-        s = "End Point [data center = " + str(self._endPointDataCenterLink) + ", numCaches = " + str(self._numCaches) + "]"
+        s = "\tData center = " + str(self._endPointDataCenterLink) + ", numCaches = " + str(self._numCaches) + "\n"
+        s = s + "\tCaches: " 
         for cache in self._cacheLinks.keys() :
-            s = s + "\t" + str(cache) + " : " +  str(self._cacheLinks.get(cache))
+            s = s + str(cache) + ":" +  str(self._cacheLinks.get(cache)) + ", "
+        s = s + "\n"
+
+        s = s + "\tRequests: " 
+        for vidNum in self._requests.keys() :
+            s = s + "Vid " + str(vidNum) + ":" +  str(self._requests.get(vidNum)) + ", "
+        s = s + "\n"
+        
         return s
 
     def addCacheLink(self, cacheNum, delay):
         self._cacheLinks[cacheNum] = delay
 
+    def addRequest(self, videoNum, num):
+        self._requests[videoNum] = num
+        
 infile = open(FILENAME)
 
 # Parse basic data
@@ -54,6 +66,16 @@ for endPointIndex in range(numEndPoints):
         delay = int(epCacheSpecParts[1])
         endPoint.addCacheLink(x, delay)
 
+# parse requests
+for i in range(numRequestDescriptions):
+    requestLine = infile.readline()
+    requestLineParts = requestLine.split()
+    vidNum = int(requestLineParts[0])
+    epNum = int(requestLineParts[1])
+    num = int(requestLineParts[2])
+    
+    endPoints[epNum].addRequest(vidNum, num)
+
 infile.close()
 
 print("Number of Videos:", numVideos)
@@ -67,4 +89,4 @@ print("Video Sizes:", videosSizes)
 print("End Points:")
 for i in range(len(endPoints)) :
     print("End Point " + str(i) + ":")
-    print("\t", str(endPoints[i]))
+    print(str(endPoints[i]))
