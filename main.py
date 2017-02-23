@@ -9,7 +9,7 @@ class EndPoint:
     def __str__(self):
         s = "End Point [data center = " + str(self._endPointDataCenterLink) + ", numCaches = " + str(self._numCaches) + "]"
         for cache in self._cacheLinks.keys() :
-            s = "\t\t" + str(cache) + " : " +  str(self._cacheLinks.get(cache))
+            s = s + "\t" + str(cache) + " : " +  str(self._cacheLinks.get(cache))
         return s
 
     def addCacheLink(self, cacheNum, delay):
