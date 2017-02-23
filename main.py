@@ -25,6 +25,7 @@ numVideos = int(generalSpecLineParts[0])
 numEndPoints = int(generalSpecLineParts[1])
 numRequestDescriptions = int(generalSpecLineParts[2])
 numCaches = int(generalSpecLineParts[3])
+cacheSize = int(generalSpecLineParts[4])
 
 # parse video sizes
 videoSizesLine = infile.readline()
@@ -59,6 +60,7 @@ print("Number of Videos:", numVideos)
 print("Number of End Points:", numEndPoints)
 print("Number of Request Descriptions:", numRequestDescriptions)
 print("Number of caches:", numCaches)
+print("Caches Size:", cacheSize)
 
 print("Video Sizes:", videosSizes)
 
