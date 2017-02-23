@@ -1,4 +1,9 @@
-if __name__ == '__main__':
-    print("A great new world")
-    print("Liam Added this line")
-    print("hello ")
+FILENAME = "examples/me_at_the_zoo.in"
+
+infile = open(FILENAME)
+
+generalSpecLine = infile.readline()
+
+infile.close()
+
+print(generalSpecLine)
